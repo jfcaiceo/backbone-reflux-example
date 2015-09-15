@@ -1,3 +1,11 @@
+var UserRouter = Backbone.Router.extend({
+  routes: {
+    "p:page(/:search)": "usersPaginator"
+  }
+});
+
+Backbone.history.start();
+
 var UserModel = Backbone.Model.extend({
   defaults: {
     photo: 'http://www.vincegolangco.com/wp-content/uploads/2010/12/mickey-mouse-for-facebook.jpg'
@@ -24,10 +32,19 @@ var UserCollection = Backbone.Collection.extend({
 var UserStore = Reflux.createStore({
   listenables: [UserActions],
   data: new UserCollection(),
+  route: new UserRouter(),
+  init: function () {
+    var _this = this;
+    this.pageNumber = 1;
+    this.route.on('route:usersPaginator', function (page, search) {
+      _this.pageNumber = page;
+      _this.currentSearch = search;
+      _this.updateData();
+    });
+  },
   onLoadPage: function (pageSize) {
     var _this = this;
     this.pageSize = pageSize;
-    this.pageNumber = 1;
     this.data.fetch({
       success: function() {
         _this.updateData();
@@ -35,13 +52,11 @@ var UserStore = Reflux.createStore({
     });
   },
   onPageChange: function(pageNumber, pageSize) {
-    this.pageNumber = pageNumber;
-    this.updateData();
+    console.log(pageNumber);
+    this.route.navigate('p' + pageNumber + (!!this.currentSearch ? "/" + this.currentSearch : '' ), {trigger: true, replace: true});
   },
   onSearch: function(value) {
-    this.currentSearch = value;
-    this.pageNumber = 1;
-    this.updateData();
+    this.route.navigate('p1' + (!!value ? "/" + value : '' ), {trigger: true, replace: true});
   },
   updateData: function() {
     var _this = this;

@@ -7,10 +7,10 @@ var Paginator = React.createClass({
     onPageChange: React.PropTypes.func.isRequired
   },
   prevPage: function(event) {
-    this.props.onPageChange.call(event, this.props.currentPage - 1);
+    this.props.onPageChange.call(event, (parseInt(this.props.currentPage) - 1) );
   },
   nextPage: function(event) {
-    this.props.onPageChange.call(event, this.props.currentPage + 1);
+    this.props.onPageChange.call(event, (parseInt(this.props.currentPage) + 1) );
   },
   render: function() {
     var prevDisabled = this.props.currentPage == 1;

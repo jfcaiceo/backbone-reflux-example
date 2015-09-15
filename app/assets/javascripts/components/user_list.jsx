@@ -11,7 +11,7 @@ var UserList = React.createClass({
     UserActions.loadPage(this.props.pageSize);
   },
   changePage:function (page) {
-    UserActions.pageChange(page, this.props.pageSize);
+    UserActions.pageChange(page);
   },
   search: function (value) {
     UserActions.search(value);

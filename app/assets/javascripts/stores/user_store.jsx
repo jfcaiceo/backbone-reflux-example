@@ -43,6 +43,22 @@ var UserStore = Reflux.createStore({
     this.pageNumber = 1;
     this.updateData();
   },
+  onDeleteUser: function(id) {
+    var _this = this;
+    this.data.find({id: id}).destroy({
+      success: function(model, response) {
+        _this.updateData();
+      }
+    });
+  },
+  onRefreshUser: function(id) {
+    var _this = this;
+    this.data.find({id: id}).fetch({
+      success: function(model, response) {
+        _this.updateData();
+      }
+    });
+  },
   updateData: function() {
     var _this = this;
     var data = this.data;

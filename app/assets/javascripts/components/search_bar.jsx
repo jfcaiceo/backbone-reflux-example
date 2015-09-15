@@ -9,7 +9,7 @@ var SearchBar = React.createClass({
   },
   render: function() {
     return (
-      <div className="navbar-form navbar-right" role="search">
+      <div>
         <div className="form-group">
           <input type="text" className="form-control" placeholder="Buscar" value={ this.props.currentSearch} onChange={this.handleInputChange}/>
         </div>

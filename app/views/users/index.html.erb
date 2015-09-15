@@ -1,4 +1,7 @@
 <div class="container-fluid">
-
+  <h2>Lista de Usuarios</h2>
+  <div class="form-group">
+    <%= link_to 'Nuevo', new_user_path, class: 'btn btn-primary' %>
+  </div>
   <%= react_component('UserList', pageSize: 3) %>
 </div>

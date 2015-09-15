@@ -23,7 +23,7 @@ var UserList = React.createClass({
     if( !!this.state.data.users) {
       if( this.state.data.users.length > 0 ) {
         display = this.state.data.users.map( function (user) {
-          return <User name={user.get('name')} description={user.get('description')} photo={user.get('photo')}/>;
+          return <User id={user.get('id')} name={user.get('name')} description={user.get('description')} photo={user.get('photo')}/>;
         })
       }
       else {
